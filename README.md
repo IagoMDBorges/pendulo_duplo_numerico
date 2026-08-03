@@ -121,7 +121,7 @@ com $\theta_2^{\text{ref}}(t)$ obtido por interpolação spline cúbica da refer
 
 ![Erro de θ2 em função do tempo](imagens/erro_de_theta2_em_funcao_do_tempo.png)
 
-Em escala log (eixo y), o erro cresce de forma aproximadamente exponencial com $t$ — assinatura típica de sensibilidade a condições iniciais em sistemas caóticos — partindo do nível de arredondamento de máquina ($\sim 10^{-16}$) em $t=0$. RK2 (vermelho) atinge erro de ordem $\mathcal{O}(1)$ já por volta de $t\approx 1$–$2\ \mathrm{s}$, RK4 (verde) segue a referência por mais tempo antes de descolar, e RK6 (azul) mantém o menor erro ao longo de quase toda a janela, embora todos os três acabem divergindo de forma equivalente após tempo suficiente — limite fundamental imposto pelo caos, não pela ordem do integrador.
+Em escala log (eixo y), o erro cresce de forma aproximadamente exponencial com $t$ — assinatura típica de sensibilidade a condições iniciais em sistemas caóticos — partindo do nível de arredondamento de máquina ($\sim 10^{-16}$) em $t=0$. RK2 (vermelho) atinge erro de ordem $\mathcal{O}(1)$ já por volta de $t\approx 1\text{–}2\,\mathrm{s}$, RK4 (verde) segue a referência por mais tempo antes de descolar, e RK6 (azul) mantém o menor erro ao longo de quase toda a janela, embora todos os três acabem divergindo de forma equivalente após tempo suficiente — limite fundamental imposto pelo caos, não pela ordem do integrador.
 
 ![Espaço de fase angular](imagens/espaco_de_fase_angular.png)
 
@@ -163,6 +163,3 @@ As três retas em escala log-log têm inclinações distintas e crescentes em ma
 - Hairer, E., Nørsett, S. P., & Wanner, G. (1993). *Solving Ordinary Differential Equations I: Nonstiff Problems* (2ª ed.). Springer.
 <<<<<<< HEAD
 - Butcher, J. C. (2016). *Numerical Methods for Ordinary Differential Equations* (3ª ed.). Wiley.
-=======
-- Butcher, J. C. (2016). *Numerical Methods for Ordinary Differential Equations* (3ª ed.). Wiley.
->>>>>>> 27a80664cb0d2b02eadef2eb38bb692b1a528399
