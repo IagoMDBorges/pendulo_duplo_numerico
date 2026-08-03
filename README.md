@@ -1,6 +1,6 @@
 # Pêndulo Duplo: Integração Numérica com RK2, RK4 e RK6
 
-Estudo comparativo de três métodos de Runge-Kutta explícitos — ordens 2, 4 e 6 (fórmula de Luther) — aplicados à integração do pêndulo duplo, um sistema dinâmico conservativo não linear com dinâmica caótica. O projeto verifica empiricamente a ordem de convergência de cada método e quantifica o erro de conservação de energia como diagnóstico da qualidade da integração.
+Estudo comparativo de três métodos de Runge-Kutta explícitos, ordens 2, 4 e 6 (fórmula de Luther), aplicados à integração do pêndulo duplo, um sistema dinâmico conservativo não linear com dinâmica caótica. O projeto verifica empiricamente a ordem de convergência de cada método e quantifica o erro de conservação de energia como diagnóstico da qualidade da integração.
 
 ## 1. Formulação do problema
 
@@ -36,7 +36,7 @@ $$
 \dot\omega_2 = \frac{2\sin\Delta \left(\omega_1^2 l_1 (m_1+m_2) + g(m_1+m_2)\cos\theta_1 + \omega_2^2 l_2 m_2 \cos\Delta\right)}{l_2\left(2m_1 + m_2 - m_2\cos 2\Delta\right)}
 $$
 
-(forma equivalente à de Weisstein, *Double Pendulum* — ver Referências). O sistema não admite solução analítica fechada e exibe sensibilidade exponencial a condições iniciais para energias suficientemente altas, o que o torna um problema-teste adequado para comparar integradores: qualquer diferença de precisão entre métodos é amplificada pela dinâmica.
+(forma equivalente à de Weisstein, *Double Pendulum*). O sistema não admite solução analítica fechada e exibe sensibilidade exponencial a condições iniciais para energias suficientemente altas, o que o torna um problema-teste adequado para comparar integradores: qualquer diferença de precisão entre métodos é amplificada pela dinâmica.
 
 Duas quantidades derivadas do estado são calculadas para diagnóstico:
 
@@ -99,7 +99,7 @@ $$
 O RK6 cumpre dois papéis no projeto:
 
 1. Um dos três métodos comparados nas simulações de $T = 12 \mathrm{s}$.
-2. **Solução de referência** de alta precisão ($h = 10^{-4}$ ou $10^{-6}$, conforme o experimento), usada para estimar o erro dos demais métodos na ausência de solução analítica — procedimento padrão quando não há forma fechada disponível.
+2. **Solução de referência** de alta precisão ($h = 10^{-4}$ ou $10^{-6}$, conforme o experimento), usada para estimar o erro dos demais métodos na ausência de solução analítica, procedimento padrão quando não há forma fechada disponível.
 
 ## 3. Metodologia dos experimentos
 
@@ -121,7 +121,7 @@ com $\theta_2^{\text{ref}}(t)$ obtido por interpolação spline cúbica da refer
 
 ![Erro de θ2 em função do tempo](imagens/erro_de_theta2_em_funcao_do_tempo.png)
 
-Em escala log (eixo y), o erro cresce de forma aproximadamente exponencial com $t$ — assinatura típica de sensibilidade a condições iniciais em sistemas caóticos — partindo do nível de arredondamento de máquina ($\sim 10^{-16}$) em $t=0$. RK2 (vermelho) atinge erro de ordem $\mathcal{O}(1)$ já por volta de $t\approx 1\text{–}2\,\mathrm{s}$, RK4 (verde) segue a referência por mais tempo antes de descolar, e RK6 (azul) mantém o menor erro ao longo de quase toda a janela, embora todos os três acabem divergindo de forma equivalente após tempo suficiente — limite fundamental imposto pelo caos, não pela ordem do integrador.
+Em escala log (eixo y), o erro cresce de forma aproximadamente exponencial com $t$, assinatura típica de sensibilidade a condições iniciais em sistemas caóticos, partindo do nível de arredondamento de máquina ($\sim 10^{-16}$) em $t=0$. RK2 (vermelho) atinge erro de ordem $\mathcal{O}(1)$ já por volta de $t\approx 1\text{–}2\,\mathrm{s}$, RK4 (verde) segue a referência por mais tempo antes de descolar, e RK6 (azul) mantém o menor erro ao longo de quase toda a janela, embora todos os três acabem divergindo de forma equivalente após tempo suficiente, limite fundamental imposto pelo caos, não pela ordem do integrador.
 
 ![Espaço de fase angular](imagens/espaco_de_fase_angular.png)
 
@@ -131,13 +131,13 @@ No espaço $(\theta_1,\theta_2)$ o mesmo efeito aparece como divergência de la�
 
 ![Trajetória da massa m2](imagens/trajetoria_da_massa_m2.png)
 
-As três trajetórias partem do mesmo ponto e permanecem próximas nos primeiros instantes, mas divergem por completo ao longo dos 12 s simulados — assinatura visual da sensibilidade a condições iniciais/erro numérico típica de sistemas caóticos, e não indício de erro de implementação.
+As três trajetórias partem do mesmo ponto e permanecem próximas nos primeiros instantes, mas divergem por completo ao longo dos 12 s simulados, assinatura visual da sensibilidade a condições iniciais/erro numérico típica de sistemas caóticos, e não indício de erro de implementação.
 
 **(c) Conservação de energia.** Calcula-se $E(t) - E(0)$ para cada método ao longo de $T=12 \mathrm{s}$. Por não haver dissipação no modelo, qualquer crescimento de $|E(t)-E(0)|$ é puramente erro numérico, permitindo comparar diretamente a qualidade dos três integradores sem depender de uma solução de referência.
 
 ![Conservação de energia](imagens/conservacao_de_energia.png)
 
-RK2 (azul) apresenta picos de erro de energia de até $\sim 0.2\ \mathrm{J}$, coincidindo com as regiões de maior divergência de trajetória em (a)-(b). RK4 e RK6 mantêm $|E(t)-E(0)|$ próximo de zero durante toda a simulação, na escala do gráfico — a diferença entre eles só fica visível na análise de convergência a seguir.
+RK2 (azul) apresenta picos de erro de energia de até $\sim 0.2\ \mathrm{J}$, coincidindo com as regiões de maior divergência de trajetória em (a)-(b). RK4 e RK6 mantêm $|E(t)-E(0)|$ próximo de zero durante toda a simulação, na escala do gráfico, a diferença entre eles só fica visível na análise de convergência a seguir.
 
 **(d) Ordem de convergência empírica.** Para um intervalo curto ($T_{\text{conv}} = 0.3 \mathrm{s}$), calcula-se o erro final
 
@@ -151,7 +151,7 @@ $$
 \log \varepsilon(h) \approx p \log h + \log C.
 $$
 
-A inclinação $p$ estimada por regressão linear (`np.polyfit`) fornece a ordem de convergência empírica, que deve se aproximar de $2$, $4$ e $6$ — a validação quantitativa central do projeto: confirma que a implementação de cada `_step` está correta e não apenas "roda sem erro de sintaxe".
+A inclinação $p$ estimada por regressão linear (`np.polyfit`) fornece a ordem de convergência empírica, que deve se aproximar de $2$, $4$ e $6$, a validação quantitativa central do projeto: confirma que a implementação de cada `_step` está correta e não apenas "roda sem erro de sintaxe".
 
 ![Análise de convergência](imagens/analise_de_convergencia.png)
 
@@ -161,5 +161,4 @@ As três retas em escala log-log têm inclinações distintas e crescentes em ma
 
 - Luther, H. A. (1968). An explicit sixth-order Runge-Kutta formula. *Mathematics of Computation*, 22(102), 434–436. https://www.ams.org/journals/mcom/1968-22-102/S0025-5718-68-99876-1/S0025-5718-68-99876-1.pdf
 - Hairer, E., Nørsett, S. P., & Wanner, G. (1993). *Solving Ordinary Differential Equations I: Nonstiff Problems* (2ª ed.). Springer.
-<<<<<<< HEAD
 - Butcher, J. C. (2016). *Numerical Methods for Ordinary Differential Equations* (3ª ed.). Wiley.
